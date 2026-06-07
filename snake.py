@@ -16,6 +16,11 @@ class Snake:
 
         self.snake_color = (255, 234, 0)
 
+        self.is_moving_down = False
+        self.is_moving_up = False
+        self.is_moving_left = False
+        self.is_moving_right = False
+
     def draw(self):
         """Draw Snake to screen."""
 
@@ -24,6 +29,28 @@ class Snake:
             self.snake_color, 
             (self.x, self.y, self.width, self.height)
         )
+
+    def update(self):
+        """Update snake position."""
+
+        if self.is_moving_down:
+            self.y += 1
+        if self.is_moving_up:
+            self.y -= 1
+        if self.is_moving_left:
+            self.x -= 1
+        if self.is_moving_right:
+            self.x += 1
+
+    def reset_movement(self):
+        """Reset the snakes movement variables to all False."""
+
+        self.is_moving_down = False
+        self.is_moving_up = False
+        self.is_moving_left = False
+        self.is_moving_right = False
+
+
 
 
     

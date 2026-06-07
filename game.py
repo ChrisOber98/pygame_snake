@@ -24,6 +24,7 @@ class Game:
 
         # Global Variables set up
         self.running = True
+        self.is_holding_key_down = False
 
         # Snake Sprite
         self.snake = Snake(self)
@@ -32,7 +33,6 @@ class Game:
         """Handles running / maintaining game loop."""
 
         while self.running:
-
             self.handle_events()
             self.update_screen()
 
@@ -42,11 +42,24 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            if event.type == pygame.KEYDOWN:
+                self.snake.reset_movement()
+                if event.key == pygame.K_w:
+                    self.snake.is_moving_up = True
+                if event.key == pygame.K_s:
+                    self.snake.is_moving_down = True
+                if event.key == pygame.K_a:
+                    self.snake.is_moving_left= True
+                if event.key == pygame.K_d:
+                    self.snake.is_moving_right = True
+            if event.type == pygame.KEYUP:
+                pass
 
     def update_screen(self):
         """Update the screen."""
 
         self.screen.fill(self.settings.screen_bg_color)
+        self.snake.update()
         self.snake.draw()
         pygame.display.flip()
         self.clock.tick(self.settings.clock_timing)
