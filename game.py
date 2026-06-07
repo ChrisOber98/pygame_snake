@@ -1,6 +1,7 @@
 import pygame
 
 from settings import Settings
+from snake import Snake
 
 class Game:
     """Class to hold representation of a game and its values / assets."""
@@ -24,6 +25,9 @@ class Game:
         # Global Variables set up
         self.running = True
 
+        # Snake Sprite
+        self.snake = Snake(self)
+
     def run_game(self):
         """Handles running / maintaining game loop."""
 
@@ -43,5 +47,6 @@ class Game:
         """Update the screen."""
 
         self.screen.fill(self.settings.screen_bg_color)
+        self.snake.draw()
         pygame.display.flip()
         self.clock.tick(self.settings.clock_timing)
