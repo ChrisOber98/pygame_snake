@@ -1,16 +1,27 @@
 import pygame
 
+from settings import Settings
+
 class Game:
     """Class to hold representation of a game and its values / assets."""
 
     def __init__(self):
         """Initialize the game."""
 
+        # Initial set up
+        self.settings = Settings()
         pygame.init()
-        self.screen = pygame.display.set_mode((800, 600))
-        pygame.display.set_caption("My Game")
+
+        # Screen set up
+        self.screen = pygame.display.set_mode(
+            (self.settings.window_width, self.settings.window_height)
+        )
+        pygame.display.set_caption(self.settings.window_caption)
+
+        # Clock Set Up 
         self.clock = pygame.time.Clock()
 
+        # Global Variables set up
         self.running = True
 
     def run_game(self):
@@ -31,6 +42,6 @@ class Game:
     def update_screen(self):
         """Update the screen."""
 
-        self.screen.fill((0, 0, 0))
+        self.screen.fill(self.settings.screen_bg_color)
         pygame.display.flip()
-        self.clock.tick(60)
+        self.clock.tick(self.settings.clock_timing)
