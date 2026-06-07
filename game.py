@@ -1,7 +1,9 @@
 import pygame
+import random
 
 from settings import Settings
 from snake import Snake
+from apple import Apple
 
 class Game:
     """Class to hold representation of a game and its values / assets."""
@@ -28,6 +30,9 @@ class Game:
 
         # Snake Sprite
         self.snake = Snake(self)
+
+        # Apple Sprite
+        self.apple = Apple(self.snake, self.settings, self)
 
     def run_game(self):
         """Handles running / maintaining game loop."""
@@ -72,6 +77,7 @@ class Game:
         self.screen.fill(self.settings.screen_bg_color)
         self.snake.update()
         self.check_out_of_bounds()
+        self.apple.draw()
         self.snake.draw()
         pygame.display.flip()
         self.clock.tick(self.settings.clock_timing)
@@ -90,3 +96,6 @@ class Game:
 
         if self.snake.y < 0:
             self.running = False
+
+
+
