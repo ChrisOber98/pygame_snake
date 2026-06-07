@@ -73,6 +73,6 @@ class Apple:
     def check_collison(self):
         """Check for a collision with the snake."""
 
-        if self.colliderect(self.snake):
-            print("collision!")
+        if self.rect.colliderect(self.snake.rect):
+            self.update_randomly()
 

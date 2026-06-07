@@ -79,7 +79,7 @@ class Game:
         self.screen.fill(self.settings.screen_bg_color)
         self.snake.update()
         self.check_out_of_bounds()
-        #self.apple.check_collison()
+        self.apple.check_collison()
         self.apple.draw()
         self.snake.draw()
         pygame.display.flip()
