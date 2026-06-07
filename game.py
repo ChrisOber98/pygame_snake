@@ -41,25 +41,52 @@ class Game:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.running = False
+                self.handle_event_quit()
             if event.type == pygame.KEYDOWN:
-                self.snake.reset_movement()
-                if event.key == pygame.K_w:
-                    self.snake.is_moving_up = True
-                if event.key == pygame.K_s:
-                    self.snake.is_moving_down = True
-                if event.key == pygame.K_a:
-                    self.snake.is_moving_left= True
-                if event.key == pygame.K_d:
-                    self.snake.is_moving_right = True
+                self.handle_event_keydown(event)
             if event.type == pygame.KEYUP:
                 pass
+
+    def handle_event_quit(self):
+        """Handles what happens when pygame.QUIT happens."""
+
+        self.running = False
+
+    def handle_event_keydown(self, event):
+        """Handles what happens when pygame.KEYDOWN happens."""
+
+        self.snake.reset_movement()
+
+        if event.key == pygame.K_w:
+            self.snake.is_moving_up = True
+        if event.key == pygame.K_s:
+            self.snake.is_moving_down = True
+        if event.key == pygame.K_a:
+            self.snake.is_moving_left= True
+        if event.key == pygame.K_d:
+            self.snake.is_moving_right = True
 
     def update_screen(self):
         """Update the screen."""
 
         self.screen.fill(self.settings.screen_bg_color)
         self.snake.update()
+        self.check_out_of_bounds()
         self.snake.draw()
         pygame.display.flip()
         self.clock.tick(self.settings.clock_timing)
+
+    def check_out_of_bounds(self):
+        """Check to see if snake has hit out of bounds."""
+
+        if self.snake.x > self.settings.window_width - self.snake.width:
+            self.running = False
+            
+        if self.snake.x < 0:
+            self.running = False
+
+        if self.snake.y > self.settings.window_height - self.snake.height:
+            self.running = False
+
+        if self.snake.y < 0:
+            self.running = False

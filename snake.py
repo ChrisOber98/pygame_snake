@@ -34,13 +34,13 @@ class Snake:
         """Update snake position."""
 
         if self.is_moving_down:
-            self.y += 1
+            self.y += 3
         if self.is_moving_up:
-            self.y -= 1
+            self.y -= 3
         if self.is_moving_left:
-            self.x -= 1
+            self.x -= 3
         if self.is_moving_right:
-            self.x += 1
+            self.x += 3
 
     def reset_movement(self):
         """Reset the snakes movement variables to all False."""
