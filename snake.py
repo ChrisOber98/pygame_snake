@@ -16,6 +16,11 @@ class Snake:
         self.x = 0
         self.y = 0
 
+        # Rect Value
+        self.rect = pygame.Rect(
+            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+        )
+
         # Color Values
         self.color = self.settings.snake_color
 
@@ -31,7 +36,7 @@ class Snake:
         pygame.draw.rect(
             self.screen, 
             self.settings.snake_color, 
-            (self.x, self.y, self.settings.cell_size, self.settings.cell_size)
+            self.rect
         )
 
     def update(self):
@@ -45,6 +50,10 @@ class Snake:
             self.x -= self.settings.snake_speed
         if self.is_moving_right:
             self.x += self.settings.snake_speed
+
+        self.rect = pygame.Rect(
+            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+        )
 
     def reset_movement(self):
         """Reset the snakes movement variables to all False."""

@@ -20,6 +20,9 @@ class Apple:
         self.x = 0
         self.y = 0
         self.color = self.settings.apple_color
+        self.rect = pygame.Rect(
+            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+        ) 
 
         # Init behaviors
         self.update_randomly()
@@ -30,7 +33,7 @@ class Apple:
         pygame.draw.rect(
             self.screen, 
             self.color, 
-            (self.x, self.y, self.settings.cell_size, self.settings.cell_size)
+            self.rect
         )
 
     def update_randomly(self):
@@ -63,4 +66,13 @@ class Apple:
         # Update Snake Position
         self.x = rand_x
         self.y = rand_y
+        self.rect = pygame.Rect(
+            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+        ) 
+
+    def check_collison(self):
+        """Check for a collision with the snake."""
+
+        if self.colliderect(self.snake):
+            print("collision!")
 
