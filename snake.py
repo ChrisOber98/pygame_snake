@@ -3,19 +3,23 @@ import pygame
 class Snake:
     """A class that holds a snake sprite for playing."""
 
-    def __init__(self, game):
+    def __init__(self, settings, game):
         """Initialize default snake sprite."""
 
+        # Settings values
+        self.settings = settings
+
+        # Game Values
         self.screen = game.screen
 
+        # Positional Values
         self.x = 0
         self.y = 0
 
-        self.width = 40
-        self.height = 40
+        # Color Values
+        self.color = self.settings.snake_color
 
-        self.snake_color = (255, 234, 0)
-
+        # Directional Values
         self.is_moving_down = False
         self.is_moving_up = False
         self.is_moving_left = False
@@ -26,21 +30,21 @@ class Snake:
 
         pygame.draw.rect(
             self.screen, 
-            self.snake_color, 
-            (self.x, self.y, self.width, self.height)
+            self.settings.snake_color, 
+            (self.x, self.y, self.settings.cell_size, self.settings.cell_size)
         )
 
     def update(self):
         """Update snake position."""
 
         if self.is_moving_down:
-            self.y += 3
+            self.y += self.settings.snake_speed
         if self.is_moving_up:
-            self.y -= 3
+            self.y -= self.settings.snake_speed
         if self.is_moving_left:
-            self.x -= 3
+            self.x -= self.settings.snake_speed
         if self.is_moving_right:
-            self.x += 3
+            self.x += self.settings.snake_speed
 
     def reset_movement(self):
         """Reset the snakes movement variables to all False."""

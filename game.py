@@ -12,10 +12,12 @@ class Game:
         """Initialize the game."""
 
         # Initial set up
-        self.settings = Settings()
         pygame.init()
 
-        # Screen set up
+        # Setting Values
+        self.settings = Settings()
+
+        # Screen Set Up
         self.screen = pygame.display.set_mode(
             (self.settings.window_width, self.settings.window_height)
         )
@@ -24,12 +26,12 @@ class Game:
         # Clock Set Up 
         self.clock = pygame.time.Clock()
 
-        # Global Variables set up
+        # Global Variables
         self.running = True
         self.is_holding_key_down = False
 
         # Snake Sprite
-        self.snake = Snake(self)
+        self.snake = Snake(self.settings, self)
 
         # Apple Sprite
         self.apple = Apple(self.snake, self.settings, self)
@@ -85,15 +87,19 @@ class Game:
     def check_out_of_bounds(self):
         """Check to see if snake has hit out of bounds."""
 
-        if self.snake.x > self.settings.window_width - self.snake.width:
+        # Check x bounds going off right of screen
+        if self.snake.x > self.settings.window_width - self.settings.cell_size:
             self.running = False
             
+        # Check x bounds going off left of screen
         if self.snake.x < 0:
             self.running = False
 
-        if self.snake.y > self.settings.window_height - self.snake.height:
+        # Check y bounds going off top of screen
+        if self.snake.y > self.settings.window_height - self.settings.cell_size:
             self.running = False
 
+        # Check y bounds going off bottom of screen
         if self.snake.y < 0:
             self.running = False
 
