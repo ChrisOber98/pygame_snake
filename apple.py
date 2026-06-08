@@ -4,7 +4,7 @@ import random
 class Apple:
     """Class to hold and represent a apple on the window."""
 
-    def __init__(self, snake, settings, game):
+    def __init__(self, snake, settings, game, tail):
         """Inits defualt values for apple entity."""
 
         # Snake Values
@@ -15,6 +15,9 @@ class Apple:
 
         # Game Values
         self.screen = game.screen
+
+        # Tail Values
+        self.tail = tail
 
         # Apple Values
         self.col = 0
@@ -72,6 +75,7 @@ class Apple:
 
         if self.rect.colliderect(self.snake.rect):
             self.update_randomly()
+            self.tail.add_body_to_tail(self.snake.previous_rect)
 
     def get_x_coord(self):
         """Takes the grid representation and returns x coord."""

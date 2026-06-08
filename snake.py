@@ -33,6 +33,9 @@ class Snake:
         self.is_moving_left = False
         self.is_moving_right = False
 
+        # Previous Value
+        self.previous_rect = None
+
     def draw(self):
         """Draw Snake to screen."""
 
@@ -44,6 +47,8 @@ class Snake:
 
     def update(self):
         """Update snake position."""
+
+        self.previous_rect= self.rect
 
         if self.is_moving_down:
             self.row += self.settings.snake_speed

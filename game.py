@@ -4,6 +4,7 @@ import random
 from settings import Settings
 from snake import Snake
 from apple import Apple
+from tail import Tail
 
 class Game:
     """Class to hold representation of a game and its values / assets."""
@@ -34,8 +35,11 @@ class Game:
         # Snake Sprite
         self.snake = Snake(self.settings, self)
 
+        # Tail values
+        self.tail = Tail(self.snake, self, self.settings)
+
         # Apple Sprite
-        self.apple = Apple(self.snake, self.settings, self)
+        self.apple = Apple(self.snake, self.settings, self, self.tail)
 
     def run_game(self):
         """Handles running / maintaining game loop."""
@@ -83,6 +87,7 @@ class Game:
         self.check_out_of_bounds()
         self.apple.check_collison()
         self.apple.draw()
+        self.tail.draw()
         self.snake.draw()
         pygame.display.flip()
 
@@ -114,6 +119,7 @@ class Game:
 
         if self.move_timer >= self.settings.move_timer:
             self.snake.update()
+            self.tail.update()
             self.move_timer = 0
 
 
