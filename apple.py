@@ -17,11 +17,16 @@ class Apple:
         self.screen = game.screen
 
         # Apple Values
-        self.x = 0
-        self.y = 0
+        self.col = 0
+        self.row = 0
         self.color = self.settings.apple_color
+
+        # Create Rect
         self.rect = pygame.Rect(
-            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+            self.get_x_coord(), 
+            self.get_y_coord(), 
+            self.settings.cell_size, 
+            self.settings.cell_size
         ) 
 
         # Init behaviors
@@ -39,35 +44,27 @@ class Apple:
     def update_randomly(self):
         """Update the apples position randomly taking into account the snake."""
 
-        # Get Random x coordinate from 0 -> screen width not including current
-        # Snake Poistion
-        rand_x = random.randint(
-            0, 
-            self.settings.window_width - self.settings.cell_size
-            )
-        while (
-            rand_x >= self.snake.get_x_coord() and 
-            rand_x <= self.snake.get_x_coord() + self.settings.cell_size
-        ):
-            rand_x = random.randint(0, self.settings.window_width)
+        # Get Random col # from 0 -> num of cols
+        num_of_cols = int(self.settings.window_width / self.settings.cell_size)
+        rand_col = random.randint(0, num_of_cols - 1)
+        while (rand_col == self.snake.col):
+            rand_col = random.randint(0, num_of_cols)
+
             
-        # Get Random y coordinate from 0 -> screen height not including current
-        # Snake Poistion
-        rand_y = random.randint(
-            0, 
-            self.settings.window_height - self.settings.cell_size
-        )
-        while (
-            rand_y >= self.snake.get_y_coord() and
-            rand_y <= self.snake.get_y_coord() + self.settings.cell_size
-        ):
-            rand_y = random.randint(0, self.settings.window_height)
+        # Get Random row # from 0 -> num of rows
+        num_of_rows = int(self.settings.window_height / self.settings.cell_size)
+        rand_row = random.randint(0, num_of_rows - 1)
+        while (rand_row == self.snake.row):
+            rand_row = random.randint(0, num_of_rows)
 
         # Update Snake Position
-        self.x = rand_x
-        self.y = rand_y
+        self.col = rand_col
+        self.row = rand_row
         self.rect = pygame.Rect(
-            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+            self.get_x_coord(), 
+            self.get_y_coord(), 
+            self.settings.cell_size, 
+            self.settings.cell_size
         ) 
 
     def check_collison(self):
@@ -75,4 +72,14 @@ class Apple:
 
         if self.rect.colliderect(self.snake.rect):
             self.update_randomly()
+
+    def get_x_coord(self):
+        """Takes the grid representation and returns x coord."""
+
+        return self.col * self.settings.cell_size
+    
+    def get_y_coord(self):
+        """Takes the grid representation and returns y coord."""
+
+        return self.row * self.settings.cell_size
 
