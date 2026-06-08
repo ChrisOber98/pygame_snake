@@ -13,12 +13,15 @@ class Snake:
         self.screen = game.screen
 
         # Positional Values
-        self.x = 0
-        self.y = 0
+        self.col = 0
+        self.row = 0
 
         # Rect Value
         self.rect = pygame.Rect(
-            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+            self.get_x_coord(), 
+            self.get_y_coord(), 
+            self.settings.cell_size, 
+            self.settings.cell_size
         )
 
         # Color Values
@@ -43,16 +46,19 @@ class Snake:
         """Update snake position."""
 
         if self.is_moving_down:
-            self.y += self.settings.snake_speed
+            self.row += self.settings.snake_speed
         if self.is_moving_up:
-            self.y -= self.settings.snake_speed
+            self.row -= self.settings.snake_speed
         if self.is_moving_left:
-            self.x -= self.settings.snake_speed
+            self.col -= self.settings.snake_speed
         if self.is_moving_right:
-            self.x += self.settings.snake_speed
+            self.col += self.settings.snake_speed
 
         self.rect = pygame.Rect(
-            self.x, self.y, self.settings.cell_size, self.settings.cell_size
+            self.get_x_coord(), 
+            self.get_y_coord(), 
+            self.settings.cell_size, 
+            self.settings.cell_size
         )
 
     def reset_movement(self):
@@ -62,6 +68,18 @@ class Snake:
         self.is_moving_up = False
         self.is_moving_left = False
         self.is_moving_right = False
+
+
+    def get_x_coord(self):
+        """Takes the grid representation and returns x coord."""
+
+        return self.col * self.settings.cell_size
+    
+    def get_y_coord(self):
+        """Takes the grid representation and returns y coord."""
+
+        return self.row * self.settings.cell_size
+  
 
 
 

@@ -46,8 +46,8 @@ class Apple:
             self.settings.window_width - self.settings.cell_size
             )
         while (
-            rand_x >= self.snake.x and 
-            rand_x <= self.snake.x + self.settings.cell_size
+            rand_x >= self.snake.get_x_coord() and 
+            rand_x <= self.snake.get_x_coord() + self.settings.cell_size
         ):
             rand_x = random.randint(0, self.settings.window_width)
             
@@ -58,8 +58,8 @@ class Apple:
             self.settings.window_height - self.settings.cell_size
         )
         while (
-            rand_y >= self.snake.y and
-            rand_y <= self.snake.y + self.settings.cell_size
+            rand_y >= self.snake.get_y_coord() and
+            rand_y <= self.snake.get_y_coord() + self.settings.cell_size
         ):
             rand_y = random.randint(0, self.settings.window_height)
 
