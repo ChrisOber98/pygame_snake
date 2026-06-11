@@ -2,7 +2,7 @@ import pygame
 import random
 
 from settings import Settings
-from snake import Snake
+from snake import Snake, Direction
 from apple import Apple
 from tail import Tail
 
@@ -67,16 +67,14 @@ class Game:
     def handle_event_keydown(self, event):
         """Handles what happens when pygame.KEYDOWN happens."""
 
-        self.snake.reset_movement()
-
         if event.key == pygame.K_w:
-            self.snake.is_moving_up = True
+            self.snake.direction = Direction.UP
         if event.key == pygame.K_s:
-            self.snake.is_moving_down = True
+            self.snake.direction = Direction.DOWN
         if event.key == pygame.K_a:
-            self.snake.is_moving_left= True
+            self.snake.direction = Direction.LEFT
         if event.key == pygame.K_d:
-            self.snake.is_moving_right = True
+            self.snake.direction = Direction.RIGHT
 
     def update_screen(self):
         """Update the screen."""

@@ -1,5 +1,16 @@
 import pygame
 
+from enum import Enum, auto
+
+class Direction(Enum):
+    """A class to represent direction for a snake object."""
+
+    UP = auto()
+    DOWN = auto()
+    LEFT = auto()
+    RIGHT = auto()
+    IDLE = auto()
+
 class Snake:
     """A class that holds a snake sprite for playing."""
 
@@ -28,10 +39,7 @@ class Snake:
         self.color = self.settings.snake_color
 
         # Directional Values
-        self.is_moving_down = False
-        self.is_moving_up = False
-        self.is_moving_left = False
-        self.is_moving_right = False
+        self.direction = Direction.IDLE
 
         # Previous Value
         self.previous_rect = None
@@ -50,13 +58,13 @@ class Snake:
 
         self.previous_rect= self.rect
 
-        if self.is_moving_down:
+        if self.direction == Direction.DOWN:
             self.row += self.settings.snake_speed
-        if self.is_moving_up:
+        if self.direction == Direction.UP:
             self.row -= self.settings.snake_speed
-        if self.is_moving_left:
+        if self.direction == Direction.LEFT:
             self.col -= self.settings.snake_speed
-        if self.is_moving_right:
+        if self.direction == Direction.RIGHT:
             self.col += self.settings.snake_speed
 
         self.rect = pygame.Rect(
@@ -65,15 +73,6 @@ class Snake:
             self.settings.cell_size, 
             self.settings.cell_size
         )
-
-    def reset_movement(self):
-        """Reset the snakes movement variables to all False."""
-
-        self.is_moving_down = False
-        self.is_moving_up = False
-        self.is_moving_left = False
-        self.is_moving_right = False
-
 
     def get_x_coord(self):
         """Takes the grid representation and returns x coord."""
