@@ -9,6 +9,7 @@ class Tail:
         """Initialize default tail values."""
 
         # Screen Values
+        self.game = game
         self.screen = game.screen
 
         # Setting Values
@@ -50,6 +51,12 @@ class Tail:
                 temp = self.tail[i]
                 self.tail[i] = prev
                 prev = temp
+
+    def check_collision_w_head(self):
+        """Check for a collision with the head."""
+
+        if self.head in self.tail:
+            self.game.running = False
 
 
         

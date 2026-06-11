@@ -88,6 +88,7 @@ class Game:
         self.check_eligable_move()
         self.check_out_of_bounds()
         self.apple.check_collison()
+        self.tail.check_collision_w_head()
         self.apple.draw()
         self.tail.draw()
         self.snake.draw()

@@ -60,8 +60,6 @@ class Snake:
         self.previous_rect= self.rect
         self.previous_direction = self.direction
 
-        print(f"previous dir {self.previous_direction}\ndir {self.direction}")
-
         if self.direction == Direction.DOWN:
             self.row += self.settings.snake_speed
         if self.direction == Direction.UP:
