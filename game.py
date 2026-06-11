@@ -68,13 +68,17 @@ class Game:
         """Handles what happens when pygame.KEYDOWN happens."""
 
         if event.key == pygame.K_w:
-            self.snake.direction = Direction.UP
+            if self.snake.previous_direction != Direction.DOWN:
+                self.snake.direction = Direction.UP
         if event.key == pygame.K_s:
-            self.snake.direction = Direction.DOWN
+            if self.snake.previous_direction != Direction.UP:
+                self.snake.direction = Direction.DOWN
         if event.key == pygame.K_a:
-            self.snake.direction = Direction.LEFT
+            if self.snake.previous_direction != Direction.RIGHT:
+                self.snake.direction = Direction.LEFT
         if event.key == pygame.K_d:
-            self.snake.direction = Direction.RIGHT
+            if self.snake.previous_direction != Direction.LEFT:
+                self.snake.direction = Direction.RIGHT
 
     def update_screen(self):
         """Update the screen."""

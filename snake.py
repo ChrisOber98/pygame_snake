@@ -40,6 +40,7 @@ class Snake:
 
         # Directional Values
         self.direction = Direction.IDLE
+        self.previous_direction = Direction.IDLE
 
         # Previous Value
         self.previous_rect = None
@@ -57,6 +58,9 @@ class Snake:
         """Update snake position."""
 
         self.previous_rect= self.rect
+        self.previous_direction = self.direction
+
+        print(f"previous dir {self.previous_direction}\ndir {self.direction}")
 
         if self.direction == Direction.DOWN:
             self.row += self.settings.snake_speed
